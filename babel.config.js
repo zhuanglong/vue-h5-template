@@ -1,5 +1,4 @@
-// 获取 VUE_APP_ENV 非 NODE_ENV，测试环境依然 console
-const IS_PROD = ['production'].includes(process.env.VUE_APP_ENV);
+const IS_PROD = ['production'].includes(process.env.NODE_ENV);
 const plugins = [
   [
     'import',
