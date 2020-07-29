@@ -69,7 +69,8 @@ module.exports = {
     if (IS_PROD) {
       config.plugin('webpack-report').use(BundleAnalyzerPlugin, [
         {
-          analyzerMode: 'static'
+          analyzerMode: 'static',
+          openAnalyzer: false // 是否自动打开
         }
       ]);
     }
