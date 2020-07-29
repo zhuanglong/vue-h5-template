@@ -10,6 +10,15 @@ import store from './store';
 
 Vue.config.productionTip = false;
 
+// 设置 js 中可以访问 $cdn
+import { $cdn } from '@/config';
+Vue.prototype.$cdn = $cdn;
+
+// 全局引入按需引入 vant
+import '@/plugins/vant';
+// 引入全局样式
+import '@/assets/css/index.scss';
+
 new Vue({
   router,
   store,
