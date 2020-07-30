@@ -18,6 +18,13 @@ export default {
 
 <style scoped lang="scss">
 .hello {
+  padding: 0 10px;
   text-align: center;
+  h1 {
+    font-size: 40px;
+  }
+  p {
+    font-size: 18px;
+  }
 }
 </style>
