@@ -26,7 +26,7 @@ service.interceptors.request.use(
     return config;
   },
   error => {
-    console.log('=== request error === ' + error);
+    console.log('=== request err === ' + error);
     return Promise.reject(error);
   }
 );
@@ -50,7 +50,7 @@ service.interceptors.response.use(
   },
   error => {
     Toast.clear();
-    console.log('=== response error === ' + error);
+    console.log('=== response err === ' + error);
     return Promise.reject(error);
   }
 );

@@ -1,5 +1,4 @@
 const path = require('path');
-console.log('===' + 'start');
 const defaultSettings = require('./src/config/index.js');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
