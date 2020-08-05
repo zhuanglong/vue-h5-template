@@ -1,6 +1,6 @@
 import Layouts from '@/views/layouts';
 
-const routes = [
+const routerMap = [
   {
     path: '/',
     component: Layouts,
@@ -26,4 +26,4 @@ const routes = [
   }
 ];
 
-export default routes;
+export default routerMap;
