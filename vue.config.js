@@ -1,15 +1,41 @@
 const path = require('path');
+console.log('===' + 'start');
 const defaultSettings = require('./src/config/index.js');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const resolve = dir => path.join(__dirname, dir);
 const IS_PROD = ['production'].includes(process.env.NODE_ENV);
 
+// // 使用 CDN 加速的 JS 文件
+// const externalLibs = {
+//   vue: 'Vue',
+//   'vue-router': 'VueRouter',
+//   vuex: 'Vuex',
+//   vant: 'vant',
+//   axios: 'axios'
+// };
+// const externalLibsCDN = {
+//   dev: {
+//     css: [],
+//     js: []
+//   },
+//   prod: {
+//     css: ['https://cdn.jsdelivr.net/npm/vant@2.4.7/lib/index.css'],
+//     js: [
+//       'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js',
+//       'https://cdn.jsdelivr.net/npm/vue-router@3.1.5/dist/vue-router.min.js',
+//       'https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js',
+//       'https://cdn.jsdelivr.net/npm/vuex@3.1.2/dist/vuex.min.js',
+//       'https://cdn.jsdelivr.net/npm/vant@2.4.7/lib/index.min.js'
+//     ]
+//   }
+// };
+
 module.exports = {
   publicPath: './', // 部署应用包时的基本 URL。hash 模式使用
   // publicPath: '/app/', // 部署应用包时的基本 URL。history 模式使用
-  outputDir: 'dist', // 输出文件目录
-  assetsDir: 'static', // outputDir 的静态资源
+  outputDir: 'dist', // 生产环境构建文件的目录
+  assetsDir: 'static', // 放置生成的静态资源的，相对于 outputDir 目录
   lintOnSave: true, // 是否每次保存都启用 eslint 验证
   productionSourceMap: false, // 如果你不需要生产环境的 source map，可以将其设为 false 以加速生成环境构建
   devServer: {
@@ -39,8 +65,13 @@ module.exports = {
   },
 
   configureWebpack: config => {
-    // 页面标题
+    // 可在模板中读取 <%= webpackConfig.name %>
     config.name = defaultSettings.title;
+
+    // 使用 CDN 加速的 JS 文件
+    // if (IS_PROD) {
+    //   config.externals = externalLibs;
+    // }
   },
 
   chainWebpack: config => {
@@ -53,6 +84,19 @@ module.exports = {
     // config.resolve.alias = {
     //   '@': resolve('src')
     // };
+
+    // 添加参数到 htmlWebpackPlugin
+    config.plugin('html').tap(args => {
+      // 使用 CDN 加速的 JS 文件
+      // if (IS_PROD) {
+      //   args[0].cdn = externalLibsCDN.prod;
+      // } else {
+      //   args[0].cdn = externalLibsCDN.dev;
+      // }
+
+      args[0].title = defaultSettings.title;
+      return args;
+    });
 
     // 设置保留空格
     config.module
