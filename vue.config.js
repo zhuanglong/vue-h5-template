@@ -45,6 +45,18 @@ module.exports = {
       warnings: false,
       errors: true
     }
+    // proxy: {
+    //   // 配置跨域
+    //   // https://test.xxx.com/api/user/login => https://test.xxx.com/user/login
+    //   '/api': {
+    //     target: 'https://test.xxx.com',
+    //     // ws: true,
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       '^/api': '/'
+    //     }
+    //   }
+    // }
   },
 
   css: {
